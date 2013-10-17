@@ -25,7 +25,7 @@ options['help'] = ARGV.include? legal_options[6]
 opts = ""
 legal_options.each do |option|
   if ARGV.include? option and legal_options.index(option) < pass_opts then
-    opts << option << " "
+    opts << option << ""
   end
   ARGV.delete(option)
 end
