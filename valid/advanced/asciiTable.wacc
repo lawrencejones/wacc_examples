@@ -100,7 +100,7 @@
 # -------------
 
 
-#Porgram:#
+#Program:#
 
 begin
 	bool printLine(int n) is

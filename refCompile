@@ -1,4 +1,4 @@
-#!/usr/bin/ruby1.9.1
+#!/usr/bin/ruby
 # comand line script that sends an HTTPS request to the WACC compiler web interface and interprets the JSON response
 
 require "rest-client"
@@ -15,7 +15,7 @@ pass_opts = 5
 target_no_min = 1
 target_no_max = 1
 
-#parse the options flags
+# parse the options flags
 options = Hash.new
 options['execute'] = ARGV.include? legal_options[4]
 options['directory'] = ARGV.include? legal_options[5] 
