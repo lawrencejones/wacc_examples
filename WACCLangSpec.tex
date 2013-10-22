@@ -284,26 +284,24 @@ For example, in an \lit*{if} statement where we want to have an empty \lit*{else
 A variable declaration statement creates a new program variable in the current scope setting its static type and initial value.
 The statement must be given a valid WACC type \synt{type}, a variable name \synt{ident} and an initial assignment value \synt{assign-rhs}.
 
-Variable names must not clash with ... ??? ...
+Variable names must not clash with other variable names within the same scope.
 
-They can consist ... ??? ...
+They must be at least one character in length, the first character of which must be either an underscore or lower/uppercase characters from 'a' to 'z'. The first character is followed by zero or more characters from a selection of underscore and alphanumerical.
 
 The initial assignment to a variable follows all of the assignment restrictions discussed in detail in the assignment statement section below.
 
-A variable must be declared before ... ??? ...
+A variable must be declared before it is referenced, where referencing is the use of the variable in any operation.
 
-Any attempt to access an undeclared variable results in ... ??? ...
+Any attempt to access an undeclared variable results in a compile error, detectable at compile time.
 
 Additionally, every use of a variable must match the type assigned to that variable when it was declared.
 
 A variable can only be accessed within the scope of its declaration (or any child scope) and it is destroyed when exiting this scope.
 Variables must be unique within their scope, so a variable cannot be redefined within the same scope.
 Variables can, however, be redefined within a child scope.
-In this case ... ??? ... 
+If scope is determined by S, where S' is a scope defined within scope S (and so on), then declaration of a variable with ident I in S' will take precedence over any declaration of the same name I within S. Hence the variable to be used in the case of a duplicate name is that declared in the deepest scope.
 
-Once the child scope is exited, ... ??? ...
-
-\fillgap{Complete the above paragraph}{5 marks}
+Once the child scope is exited, the variable is destroyed and the rules apply again for scoping.
 
 \paragraph{Assignment Statements:}
 An assignment statement updates its target (the left-hand side of the \lit{=}) with a new value (the right-hand side of the \lit{=}).
@@ -357,7 +355,7 @@ The type of the expression given to the return statement must match the return t
 Once the return statement is executed, the function is immediately exited.
 
 \paragraph{Exit Statements:}
-\fillgap{define exit statements}{2 marks}
+An exit statement signifies the termination of the current program execution. Given an expression as an argument, the program will cease to execute and control flow is handed back to the governing process. Any lines of code following the exit statement will not be executed, and the given argument is returned as the program exit code.
 
 \paragraph{Print Statements:}
 There are two types of print command in the WACC language.
@@ -381,11 +379,11 @@ The behaviour of the print statements for each type of expression is shown in Ta
     \hline
     \lit*{char} & Output a single-character string. & \lit*{'c'} & ``c'' \\
     \hline
-    \lit*{string} or \lit*{char[]} & ??? & ??? & ??? \\
+    \lit*{string} or \lit*{char[]} & Outputs the contents of the string (char array) to stdout. & "hello" & "hello" \\
     \hline
-    Other Array Types & ??? & ??? & ??? \\  
+    Other Array Types & Will print the pointer value in hexidecimal & [ 0, 0 ] & 0xff26ed10 \\  
     \hline
-    \lit*{pair} & ??? & \lit*{newpair(a, b)}\footnotemark[1] & ??? \\
+    \lit*{pair} & Prints the pointer value of the pair & \lit*{newpair(a, b)}\footnotemark[1] & 0x12028 \\
     \hline
   \end{tabulary}
   \caption{The behaviour of the print statements for each type of expression.}
@@ -403,7 +401,7 @@ Otherwise, the \lit{else} body statement is executed.
 Each of the program branches is executed in its own scope, which are denoted by the \lit{then} and \lit{else} tokens and the \lit{else} and \lit{fi} tokens, respectively.
 
 \paragraph{While Loop Statements:}
-\fillgap{Define/describe while loop statements}{6 marks}
+A while loop is a program construct that allows repetition of a body of code up to the point at which the initial boolean condition evaluates to false. The \lit{while} keyword is followed with an expression that evaluates to a \lit{bool}. On the start of each iteration, the expression is recalculated and assuming it evaluates to \lit{true}, then the body statement is executed. At any point if the expression is evaluated and it turns to \lit{false} then the body statement is skipped and execution continues past the while loops scope (the end of which is denoted by the \lit{done;} token).
 
 \paragraph{Scoping Statements:}
 A scoping statement introduces a new program scope, which is denoted by the \lit{begin} and \lit{end} tokens.
